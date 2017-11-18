@@ -30,6 +30,7 @@
 
 #include <QDialog>
 #include <QMediaPlayer>
+#include <QMouseEvent>
 
 namespace Ui {
 class FrameViewerDialog;
@@ -51,7 +52,7 @@ public:
     bool isPlaying();
 
 private slots:
-    void on_closeButton_clicked();
+    void mouseDoubleClickEvent(QMouseEvent *);
 
 private:
     Ui::FrameViewerDialog *ui;

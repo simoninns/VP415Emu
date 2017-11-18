@@ -30,6 +30,7 @@
 
 #include <QVideoWidget>
 #include <QPalette>
+#include <QMouseEvent>
 
 FrameViewerDialog::FrameViewerDialog(QWidget *parent) :
     QDialog(parent),
@@ -42,6 +43,7 @@ FrameViewerDialog::FrameViewerDialog(QWidget *parent) :
     p.setColor(QPalette::Background, Qt::black);
     ui->videoWidget->setPalette(p);
     ui->videoWidget->setAttribute(Qt::WA_OpaquePaintEvent);
+    ui->videoWidget->setAttribute(Qt::WA_TransparentForMouseEvents);
 
     // Attach a media player to the video widget
     player = new QMediaPlayer(ui->videoWidget);
@@ -57,13 +59,6 @@ void FrameViewerDialog::loadDiscImage(QString fileName)
 {
     player->setMedia(QUrl::fromLocalFile(fileName));
     player->setVideoOutput(ui->videoWidget);
-}
-
-// Frame viewer close button clicked
-void FrameViewerDialog::on_closeButton_clicked()
-{
-    // Hide the dialogue
-    hide();
 }
 
 // Move to a specified frame number
@@ -112,3 +107,18 @@ bool FrameViewerDialog::isPlaying()
 
     return playerStatus;
 }
+
+// Mouse click event on the video player
+void FrameViewerDialog::mouseDoubleClickEvent(QMouseEvent* event)
+{
+    if (this->isFullScreen()) {
+        qDebug() << "Double-click on videowidget - returning to windowed mode";
+        this->showNormal();
+    } else {
+        qDebug() << "Double-click on videowidget - going full screen";
+        this->showFullScreen();
+    }
+
+    event->accept();
+}
+
