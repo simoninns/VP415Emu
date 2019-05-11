@@ -714,7 +714,7 @@ void PlayerEmulator::sendDelayedFcodeResponse(QByteArray fcodeResponse, int poll
 // QStrings for display
 QString PlayerEmulator::getFrameNumber(void)
 {
-    return QString::number(frameNumber);
+    return QString::number(frameNumber + 2);
 }
 
 QString PlayerEmulator::getStopRegister(void)
@@ -1187,7 +1187,7 @@ void PlayerEmulator::fcodePictureNumberRequest(void)
 
    if (currentDiscType == discType::CAV) {
        if (tray == trayPosition::closed) {
-           frameNumber = frameViewer->getFrame();
+           frameNumber = frameViewer->getFrame() + 2;
            QString currentFrame = QString("%1").arg(frameNumber, 5, 10, QChar('0'));
            qDebug() << "fcodePictureNumberRequest(): Current frame number is " << frameNumber;
 

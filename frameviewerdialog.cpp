@@ -69,7 +69,7 @@ void FrameViewerDialog::setFrame(qint64 frameNumber)
 
     // Video is PAL and always 25 frames per second, so 1000/25
     // is 40 ms per frame
-    qint64 msPosition = (frameNumber) * 40;
+    qint64 msPosition = (frameNumber - 1) * 40;
 
     // Show the desired frame
     player->setPosition(msPosition);
@@ -82,7 +82,7 @@ qint64 FrameViewerDialog::getFrame()
 
     currentMs = player->position();
 
-    return currentMs / 40;
+    return (currentMs / 40) - 1;
 }
 
 // Play video from current frame
