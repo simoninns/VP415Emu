@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>531</width>
-    <height>251</height>
+    <width>536</width>
+    <height>269</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QGroupBox" name="playerStatusGroupBox">
       <property name="title">
        <string>Player Status</string>
@@ -24,8 +24,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
-         <width>81</width>
+         <y>30</y>
+         <width>111</width>
          <height>16</height>
         </rect>
        </property>
@@ -36,8 +36,8 @@
       <widget class="QLineEdit" name="playerFrameNumber">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>20</y>
+         <x>130</x>
+         <y>30</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -50,9 +50,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>50</y>
-         <width>47</width>
-         <height>13</height>
+         <y>60</y>
+         <width>101</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -63,9 +63,9 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>80</y>
-         <width>47</width>
-         <height>13</height>
+         <y>90</y>
+         <width>101</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -76,8 +76,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>110</y>
-         <width>81</width>
+         <y>120</y>
+         <width>101</width>
          <height>16</height>
         </rect>
        </property>
@@ -89,8 +89,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>140</y>
-         <width>71</width>
+         <y>150</y>
+         <width>101</width>
          <height>16</height>
         </rect>
        </property>
@@ -101,8 +101,8 @@
       <widget class="QLineEdit" name="playerStatus">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>50</y>
+         <x>130</x>
+         <y>60</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -114,8 +114,8 @@
       <widget class="QLineEdit" name="playerDirection">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>80</y>
+         <x>130</x>
+         <y>90</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -127,8 +127,8 @@
       <widget class="QLineEdit" name="playerStopRegister">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>110</y>
+         <x>130</x>
+         <y>120</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -140,8 +140,8 @@
       <widget class="QLineEdit" name="playerInfoRegister">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>140</y>
+         <x>130</x>
+         <y>150</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -153,10 +153,10 @@
       <widget class="QLabel" name="label_6">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>20</y>
-         <width>47</width>
-         <height>13</height>
+         <x>270</x>
+         <y>30</y>
+         <width>101</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -166,10 +166,10 @@
       <widget class="QLabel" name="label_7">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>50</y>
-         <width>47</width>
-         <height>13</height>
+         <x>270</x>
+         <y>60</y>
+         <width>101</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -179,10 +179,10 @@
       <widget class="QLabel" name="label_8">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>80</y>
-         <width>47</width>
-         <height>13</height>
+         <x>270</x>
+         <y>90</y>
+         <width>101</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="text">
@@ -192,8 +192,8 @@
       <widget class="QLineEdit" name="playerAudio1">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>20</y>
+         <x>380</x>
+         <y>30</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -205,8 +205,8 @@
       <widget class="QLineEdit" name="playerAudio2">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>50</y>
+         <x>380</x>
+         <y>60</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -218,8 +218,8 @@
       <widget class="QLineEdit" name="playerDiscType">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>80</y>
+         <x>380</x>
+         <y>90</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -231,9 +231,9 @@
       <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>110</y>
-         <width>81</width>
+         <x>270</x>
+         <y>120</y>
+         <width>101</width>
          <height>16</height>
         </rect>
        </property>
@@ -244,8 +244,8 @@
       <widget class="QLineEdit" name="playerVideoOverlay">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>110</y>
+         <x>380</x>
+         <y>120</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -257,9 +257,9 @@
       <widget class="QLabel" name="label_10">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>140</y>
-         <width>71</width>
+         <x>270</x>
+         <y>150</y>
+         <width>101</width>
          <height>16</height>
         </rect>
        </property>
@@ -270,8 +270,8 @@
       <widget class="QLineEdit" name="playerVideoOutput">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>140</y>
+         <x>380</x>
+         <y>150</y>
          <width>113</width>
          <height>20</height>
         </rect>
@@ -289,8 +289,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>531</width>
-     <height>21</height>
+     <width>536</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
