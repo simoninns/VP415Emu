@@ -27,9 +27,6 @@
 
 #include "fcodeanalyser.h"
 
-#include <QByteArray>
-#include <QDebug>
-
 FcodeAnalyser::FcodeAnalyser()
 {
     // Reset the fcode buffer

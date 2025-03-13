@@ -1,8 +1,8 @@
 /************************************************************************
 
-    usercodeanalyser.h
+    serialmonitordialog.h
 
-    User code analyser function header
+    Serial monitor dialogue function header
     VP415Emu - VP415 LaserDisc player emulator for BeebSCSI
     Copyright (C) 2017 Simon Inns
 
@@ -25,23 +25,36 @@
 
 ************************************************************************/
 
-#ifndef USERCODEANALYSER_H
-#define USERCODEANALYSER_H
+#ifndef SERIALMONITORDIALOG_H
+#define SERIALMONITORDIALOG_H
 
-#include <QString>
+#include <QDialog>
+#include <QScrollBar>
+#include <QTime>
 
-class UserCodeAnalyser
+#include "ui_serialmonitordialog.h"
+
+namespace Ui {
+class SerialMonitorDialog;
+}
+
+class SerialMonitorDialog : public QDialog
 {
-public:
-    UserCodeAnalyser();
+    Q_OBJECT
 
-    void putData(const QByteArray &data);
-    QByteArray getUserCode(void);
+public:
+    explicit SerialMonitorDialog(QWidget *parent = nullptr);
+    ~SerialMonitorDialog();
+
+    void putData(const QByteArray &data, bool timeStamp);
+
+private slots:
+    void on_closeButton_clicked();
+
+    void on_clearButton_clicked();
 
 private:
-    QString userCodeBuffer;
-
-    QString lastUserCode;
+    Ui::SerialMonitorDialog *ui;
 };
 
-#endif // USERCODEANALYSER_H
+#endif // SERIALMONITORDIALOG_H

@@ -1,8 +1,8 @@
 /************************************************************************
 
-    frameviewerdialog.h
+    settingsdialog.h
 
-    Frame viewer dialogue function header
+    Settings dialogue function header
     VP415Emu - VP415 LaserDisc player emulator for BeebSCSI
     Copyright (C) 2017 Simon Inns
 
@@ -25,39 +25,48 @@
 
 ************************************************************************/
 
-#ifndef FRAMEVIEWERDIALOG_H
-#define FRAMEVIEWERDIALOG_H
+#ifndef SETTINGSDIALOG_H
+#define SETTINGSDIALOG_H
 
 #include <QDialog>
-#include <QMediaPlayer>
-#include <QMouseEvent>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QLineEdit>
+
+#include "../ui/ui_settingsdialog.h"
 
 namespace Ui {
-class FrameViewerDialog;
+class SettingsDialog;
 }
 
-class FrameViewerDialog : public QDialog
+class SettingsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit FrameViewerDialog(QWidget *parent = 0);
-    ~FrameViewerDialog();
+    struct Settings {
+        QString name;
+        QSerialPort::BaudRate baudRate;
+        QSerialPort::DataBits dataBits;
+        QSerialPort::Parity parity;
+        QSerialPort::StopBits stopBits;
+        QSerialPort::FlowControl flowControl;
+    };
 
-    void loadDiscImage(QString fileName);
-    void setFrame(qint64 frameNumber);
-    qint64 getFrame();
-    void play();
-    void pause();
-    bool isPlaying();
+    explicit SettingsDialog(QWidget *parent = nullptr);
+    ~SettingsDialog();
+
+    Settings settings() const;
 
 private slots:
-    void mouseDoubleClickEvent(QMouseEvent *);
+    void on_pushButton_clicked();
 
 private:
-    Ui::FrameViewerDialog *ui;
+    Ui::SettingsDialog *ui;
+    Settings currentSettings;
 
-    QMediaPlayer *player;
+    void fillPortsInfo();
+    void updateSettings();
 };
 
-#endif // FRAMEVIEWERDIALOG_H
+#endif // SETTINGSDIALOG_H

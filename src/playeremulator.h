@@ -29,6 +29,9 @@
 #define PLAYEREMULATOR_H
 
 #include <QString>
+#include <QDebug>
+
+#include "frameviewerdialog.h"
 
 class FrameViewerDialog;
 

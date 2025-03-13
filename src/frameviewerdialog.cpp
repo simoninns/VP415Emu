@@ -26,11 +26,6 @@
 ************************************************************************/
 
 #include "frameviewerdialog.h"
-#include "ui_frameviewerdialog.h"
-
-#include <QVideoWidget>
-#include <QPalette>
-#include <QMouseEvent>
 
 FrameViewerDialog::FrameViewerDialog(QWidget *parent) :
     QDialog(parent),

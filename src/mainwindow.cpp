@@ -26,21 +26,6 @@
 ************************************************************************/
 
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "settingsdialog.h"
-#include "serialmonitordialog.h"
-#include "fcodemonitordialog.h"
-#include "fcodeanalyser.h"
-#include "usercodeanalyser.h"
-#include "playeremulator.h"
-
-#include <QMessageBox>
-#include <QLabel>
-#include <QtSerialPort/QSerialPort>
-#include <QCloseEvent>
-#include <QTimer>
-#include <QDebug>
-#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

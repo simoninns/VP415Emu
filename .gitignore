@@ -45,3 +45,5 @@ target_wrapper.*
 # QtCtreator CMake
 CMakeLists.txt.user*
 
+# CMake build directory
+/build

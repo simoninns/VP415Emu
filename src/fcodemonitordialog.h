@@ -1,8 +1,8 @@
 /************************************************************************
 
-    settingsdialog.h
+    fcodemonitordialog.h
 
-    Settings dialogue function header
+    F-Code monitor dialogue function header
     VP415Emu - VP415 LaserDisc player emulator for BeebSCSI
     Copyright (C) 2017 Simon Inns
 
@@ -25,44 +25,37 @@
 
 ************************************************************************/
 
-#ifndef SETTINGSDIALOG_H
-#define SETTINGSDIALOG_H
+#ifndef FCODEMONITORDIALOG_H
+#define FCODEMONITORDIALOG_H
 
 #include <QDialog>
-#include <QtSerialPort/QSerialPort>
+#include <QScrollBar>
+#include <QTime>
+
+#include "ui_fcodemonitordialog.h"
 
 namespace Ui {
-class SettingsDialog;
+class FcodeMonitorDialog;
 }
 
-class SettingsDialog : public QDialog
+class FcodeMonitorDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    struct Settings {
-        QString name;
-        QSerialPort::BaudRate baudRate;
-        QSerialPort::DataBits dataBits;
-        QSerialPort::Parity parity;
-        QSerialPort::StopBits stopBits;
-        QSerialPort::FlowControl flowControl;
-    };
+    explicit FcodeMonitorDialog(QWidget *parent = 0);
+    ~FcodeMonitorDialog();
 
-    explicit SettingsDialog(QWidget *parent = nullptr);
-    ~SettingsDialog();
-
-    Settings settings() const;
+    void putData(const QByteArray &data, bool timeStamp);
+    void putResponse(const QByteArray &data, bool timeStamp);
 
 private slots:
-    void on_pushButton_clicked();
+    void on_clearButton_clicked();
+
+    void on_closeButton_clicked();
 
 private:
-    Ui::SettingsDialog *ui;
-    Settings currentSettings;
-
-    void fillPortsInfo();
-    void updateSettings();
+    Ui::FcodeMonitorDialog *ui;
 };
 
-#endif // SETTINGSDIALOG_H
+#endif // FCODEMONITORDIALOG_H

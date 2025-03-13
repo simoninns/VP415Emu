@@ -26,10 +26,6 @@
 ************************************************************************/
 
 #include "playeremulator.h"
-#include "frameviewerdialog.h"
-
-#include <QString>
-#include <QDebug>
 
 PlayerEmulator::PlayerEmulator()
 {

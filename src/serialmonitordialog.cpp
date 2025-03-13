@@ -26,10 +26,6 @@
 ************************************************************************/
 
 #include "serialmonitordialog.h"
-#include "ui_serialmonitordialog.h"
-
-#include <QScrollBar>
-#include <QTime>
 
 SerialMonitorDialog::SerialMonitorDialog(QWidget *parent) :
     QDialog(parent),

@@ -1,8 +1,8 @@
 /************************************************************************
 
-    serialmonitordialog.h
+    frameviewerdialog.h
 
-    Serial monitor dialogue function header
+    Frame viewer dialogue function header
     VP415Emu - VP415 LaserDisc player emulator for BeebSCSI
     Copyright (C) 2017 Simon Inns
 
@@ -25,32 +25,43 @@
 
 ************************************************************************/
 
-#ifndef SERIALMONITORDIALOG_H
-#define SERIALMONITORDIALOG_H
+#ifndef FRAMEVIEWERDIALOG_H
+#define FRAMEVIEWERDIALOG_H
 
 #include <QDialog>
+#include <QMediaPlayer>
+#include <QVideoWidget>
+#include <QPalette>
+#include <QMouseEvent>
+
+#include "ui_frameviewerdialog.h"
 
 namespace Ui {
-class SerialMonitorDialog;
+class FrameViewerDialog;
 }
 
-class SerialMonitorDialog : public QDialog
+class FrameViewerDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit SerialMonitorDialog(QWidget *parent = nullptr);
-    ~SerialMonitorDialog();
+    explicit FrameViewerDialog(QWidget *parent = 0);
+    ~FrameViewerDialog();
 
-    void putData(const QByteArray &data, bool timeStamp);
+    void loadDiscImage(QString fileName);
+    void setFrame(qint64 frameNumber);
+    qint64 getFrame();
+    void play();
+    void pause();
+    bool isPlaying();
 
 private slots:
-    void on_closeButton_clicked();
-
-    void on_clearButton_clicked();
+    void mouseDoubleClickEvent(QMouseEvent *);
 
 private:
-    Ui::SerialMonitorDialog *ui;
+    Ui::FrameViewerDialog *ui;
+
+    QMediaPlayer *player;
 };
 
-#endif // SERIALMONITORDIALOG_H
+#endif // FRAMEVIEWERDIALOG_H

@@ -27,9 +27,6 @@
 
 #include "usercodeanalyser.h"
 
-#include <QByteArray>
-#include <QDebug>
-
 UserCodeAnalyser::UserCodeAnalyser()
 {
     // Reset the fcode buffer

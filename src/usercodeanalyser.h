@@ -1,8 +1,8 @@
 /************************************************************************
 
-    fcodeanalyser.h
+    usercodeanalyser.h
 
-    F-Code analyser function header
+    User code analyser function header
     VP415Emu - VP415 LaserDisc player emulator for BeebSCSI
     Copyright (C) 2017 Simon Inns
 
@@ -25,23 +25,25 @@
 
 ************************************************************************/
 
-#ifndef FCODEANALYSER_H
-#define FCODEANALYSER_H
+#ifndef USERCODEANALYSER_H
+#define USERCODEANALYSER_H
 
 #include <QString>
+#include <QByteArray>
+#include <QDebug>
 
-class FcodeAnalyser
+class UserCodeAnalyser
 {
 public:
-    FcodeAnalyser();
+    UserCodeAnalyser();
 
     void putData(const QByteArray &data);
-    QByteArray getFcode(void);
+    QByteArray getUserCode(void);
 
 private:
-    QString fcodeBuffer;
+    QString userCodeBuffer;
 
-    QString lastFcode;
+    QString lastUserCode;
 };
 
-#endif // FCODEANALYSER_H
+#endif // USERCODEANALYSER_H

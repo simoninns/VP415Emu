@@ -1,8 +1,8 @@
 /************************************************************************
 
-    fcodemonitordialog.h
+    fcodeanalyser.h
 
-    F-Code monitor dialogue function header
+    F-Code analyser function header
     VP415Emu - VP415 LaserDisc player emulator for BeebSCSI
     Copyright (C) 2017 Simon Inns
 
@@ -25,33 +25,25 @@
 
 ************************************************************************/
 
-#ifndef FCODEMONITORDIALOG_H
-#define FCODEMONITORDIALOG_H
+#ifndef FCODEANALYSER_H
+#define FCODEANALYSER_H
 
-#include <QDialog>
+#include <QString>
+#include <QByteArray>
+#include <QDebug>
 
-namespace Ui {
-class FcodeMonitorDialog;
-}
-
-class FcodeMonitorDialog : public QDialog
+class FcodeAnalyser
 {
-    Q_OBJECT
-
 public:
-    explicit FcodeMonitorDialog(QWidget *parent = 0);
-    ~FcodeMonitorDialog();
+    FcodeAnalyser();
 
-    void putData(const QByteArray &data, bool timeStamp);
-    void putResponse(const QByteArray &data, bool timeStamp);
-
-private slots:
-    void on_clearButton_clicked();
-
-    void on_closeButton_clicked();
+    void putData(const QByteArray &data);
+    QByteArray getFcode(void);
 
 private:
-    Ui::FcodeMonitorDialog *ui;
+    QString fcodeBuffer;
+
+    QString lastFcode;
 };
 
-#endif // FCODEMONITORDIALOG_H
+#endif // FCODEANALYSER_H

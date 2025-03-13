@@ -26,10 +26,6 @@
 ************************************************************************/
 
 #include "fcodemonitordialog.h"
-#include "ui_fcodemonitordialog.h"
-
-#include <QScrollBar>
-#include <QTime>
 
 FcodeMonitorDialog::FcodeMonitorDialog(QWidget *parent) :
     QDialog(parent),

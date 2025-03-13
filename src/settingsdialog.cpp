@@ -26,10 +26,6 @@
 ************************************************************************/
 
 #include "settingsdialog.h"
-#include "ui_settingsdialog.h"
-
-#include <QtSerialPort/QSerialPortInfo>
-#include <QLineEdit>
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),

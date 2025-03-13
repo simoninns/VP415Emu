@@ -32,6 +32,19 @@
 #include <QtCore/QtGlobal>
 #include <QtSerialPort/QSerialPort>
 #include <QFileDialog>
+#include <QMessageBox>
+#include <QLabel>
+#include <QCloseEvent>
+#include <QTimer>
+#include <QDebug>
+
+#include "ui_mainwindow.h"
+#include "settingsdialog.h"
+#include "serialmonitordialog.h"
+#include "fcodemonitordialog.h"
+#include "fcodeanalyser.h"
+#include "usercodeanalyser.h"
+#include "playeremulator.h"
 
 QT_BEGIN_NAMESPACE
 
