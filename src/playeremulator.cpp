@@ -91,7 +91,12 @@ void PlayerEmulator::showFrameViewer()
 // Load a disc image (video)
 void PlayerEmulator::loadDiscImage(QString fileName)
 {
+    qDebug() << "PlayerEmulator::loadDiscImage(): Loading disc image: " << fileName;
     frameViewer->loadDiscImage(fileName);
+
+    // Set the tray to closed
+    tray = trayPosition::closed;
+    qDebug() << "PlayerEmulator::loadDiscImage(): Disc tray set to closed";
 }
 
 // Main time-based polling function for emulation
@@ -927,8 +932,10 @@ void PlayerEmulator::fcodeEject(void)
     tray = trayPosition::open;
 
     // Respond that tray is now open
-    responseToFcode = "O";
-    responseToFcodeWaiting = true;
+    // This response is sent after the tray is opened and, if we send it too
+    // quickly, the Domesday software will miss it.
+    qDebug() << "fcodeEject(): Sending delayed O response";
+    sendDelayedFcodeResponse("O", 50, false); // Don't play after send
 }
 
 // TRANSMISSION DELAY OFF
