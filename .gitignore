@@ -47,3 +47,6 @@ CMakeLists.txt.user*
 
 # CMake build directory
 /build
+
+# VP415 Video files
+/video

@@ -244,7 +244,7 @@ void MainWindow::on_actionF_Code_console_triggered()
 // Open a laser video disc image file
 void MainWindow::on_actionOpen_disc_image_triggered()
 {
-    fileName = QFileDialog::getOpenFileName(this, tr("Open laser disc image"), QDir::homePath(), tr("AVI Files (*.avi)"));
+    fileName = QFileDialog::getOpenFileName(this, tr("Open laserdisc image"), QDir::homePath(), tr("MP4 Files (*.mp4)"));
 
     // Load the file into the frame viewer
     player->loadDiscImage(fileName);
