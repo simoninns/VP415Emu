@@ -923,22 +923,12 @@ void PlayerEmulator::fcodeEject(void)
 {
     qDebug() << "fcodeEject(): Called";
 
-    // Is tray closed?
-    if (tray == trayPosition::closed)
-    {
-       // Set tray to open
-       tray = trayPosition::open;
+    // Set tray to open
+    tray = trayPosition::open;
 
-       // Respond that tray is now open
-       responseToFcode = "O";
-       responseToFcodeWaiting = true;
-    }
-    else
-    {
-       // Respond that tray is already open
-       responseToFcode = "O";
-       responseToFcodeWaiting = true;
-    }
+    // Respond that tray is now open
+    responseToFcode = "O";
+    responseToFcodeWaiting = true;
 }
 
 // TRANSMISSION DELAY OFF
@@ -1119,20 +1109,21 @@ void PlayerEmulator::fcodeOn(void)
 {
    qDebug() << "fcodeOn(): Called";
 
-   if (tray == trayPosition::closed) {
-       playerStatus = switchState::on;
-       frameNumber = 1;
-       frameViewer->setFrame(frameNumber);
-       frameViewer->pause();
+   if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
 
-       // Respond that drive is spun-up and ready
-       responseToFcode = "S";
-       responseToFcodeWaiting = true;
-   } else {
-       // Respond that tray is already open
-       responseToFcode = "O";
-       responseToFcodeWaiting = true;
-   }
+    playerStatus = switchState::on;
+    frameNumber = 1;
+    frameViewer->setFrame(frameNumber);
+    frameViewer->pause();
+
+    // Respond that drive is spun-up and ready
+    responseToFcode = "S";
+    responseToFcodeWaiting = true;
 }
 
 // PAUSE
@@ -1181,19 +1172,20 @@ void PlayerEmulator::fcodePictureNumberRequest(void)
 {
    qDebug() << "fcodePictureNumberRequest(): Called";
 
-   if (currentDiscType == discType::CAV) {
-       if (tray == trayPosition::closed) {
-           frameNumber = frameViewer->getFrame() + 2;
-           QString currentFrame = QString("%1").arg(frameNumber, 5, 10, QChar('0'));
-           qDebug() << "fcodePictureNumberRequest(): Current frame number is " << frameNumber;
+   if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
 
-           responseToFcode = "F" + currentFrame.toLocal8Bit();
-           responseToFcodeWaiting = true;
-       } else {
-           // Respond that tray is already open
-           responseToFcode = "O";
-           responseToFcodeWaiting = true;
-       }
+   if (currentDiscType == discType::CAV) {
+        frameNumber = frameViewer->getFrame() + 2;
+        QString currentFrame = QString("%1").arg(frameNumber, 5, 10, QChar('0'));
+        qDebug() << "fcodePictureNumberRequest(): Current frame number is " << frameNumber;
+
+        responseToFcode = "F" + currentFrame.toLocal8Bit();
+        responseToFcodeWaiting = true;
    } else {
        // Wrong disc type
        responseToFcode = "X";
@@ -1396,7 +1388,7 @@ void PlayerEmulator::fcodePlayerStatusRequest(void)
 // 				U(85D = 55H)
 // Response: 	Positive ack : U xI x2 x3 x4 x5
 // 				Negative ack: X if user code not available
-// 				0 if disc-tray open
+// 				O if disc-tray open
 // Function: To return the user code, as recorded on the disc.
 //
 // One line of user code is read during lead-in at player start-up. This is
@@ -1413,9 +1405,16 @@ void PlayerEmulator::fcodeUserCodeRequest(void)
 {
    qDebug() << "fcodeUserCodeRequest(): Called";
 
+   if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
+
    // Send the response
-   responseToFcode = "U" + currentUserCode;
-   responseToFcodeWaiting = true;
+    responseToFcode = "U" + currentUserCode;
+    responseToFcodeWaiting = true;
 }
 
 // REVISION LEVEL REQUEST
@@ -1604,15 +1603,16 @@ void PlayerEmulator::fcodeLoadPictureNumberInfoRegister(int x)
 {
    qDebug() << "fcodeLoadPictureNumberInfoRegister(): Called with x = " << x;
 
+    if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
+
    if (currentDiscType == discType::CAV) {
-       if (tray == trayPosition::closed) {
-            infoRegister = x;
-            infoRegisterResponse = "A3";
-       } else {
-           // Respond that tray is already open
-           responseToFcode = "O";
-           responseToFcodeWaiting = true;
-       }
+        infoRegister = x;
+        infoRegisterResponse = "A3";
    } else {
        // Wrong disc type
        responseToFcode = "AN";
@@ -1638,15 +1638,16 @@ void PlayerEmulator::fcodeLoadPictureNumberStopRegister(int x)
 {
    qDebug() << "fcodeLoadPictureNumberStopRegister(): Called with x = " << x;
 
+   if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
+
    if (currentDiscType == discType::CAV) {
-       if (tray == trayPosition::closed) {
-            stopRegister = x;
-            stopRegisterResponse = "A2";
-       } else {
-           // Respond that tray is already open
-           responseToFcode = "O";
-           responseToFcodeWaiting = true;
-       }
+        stopRegister = x;
+        stopRegisterResponse = "A2";
    } else {
        // Wrong disc type
        responseToFcode = "AN";
@@ -1677,28 +1678,28 @@ void PlayerEmulator::fcodeGotoPictureNumberAndHalt(int x)
 {
    qDebug() << "fcodeGotoPictureNumberAndHalt(): Called with x = " << x;
 
+   if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
+
    if (currentDiscType == discType::CAV) {
-       if (tray == trayPosition::closed) {
+        frameViewer->setFrame(x);
+        frameViewer->pause();
 
-           frameViewer->setFrame(x);
-           frameViewer->pause();
+        if (std::abs(frameNumber - x) > 50) {
+            // Send delayed F-code to emulate head movement delay
+            sendDelayedFcodeResponse("A0", 15, false); // Don't play after send
+        } else {
+            // Respond immediately
+            responseToFcode = "A0";
+            responseToFcodeWaiting = true;
+        }
 
-           if (std::abs(frameNumber - x) > 50) {
-               // Send delayed F-code to emulate head movement delay
-               sendDelayedFcodeResponse("A0", 15, false); // Don't play after send
-           } else {
-               // Respond immediately
-               responseToFcode = "A0";
-               responseToFcodeWaiting = true;
-           }
-
-           // Clear STOP register
-           stopRegister = 0;
-       } else {
-           // Respond that tray is already open
-           responseToFcode = "O";
-           responseToFcodeWaiting = true;
-       }
+        // Clear STOP register
+        stopRegister = 0;
    } else {
        // Wrong disc type
        responseToFcode = "AN";
@@ -1729,27 +1730,28 @@ void PlayerEmulator::fcodeGotoPictureNumberAndPlay(int x)
 {
    qDebug() << "fcodeGotoPictureNumberAndPlay(): Called with x = " << x;
 
+   if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
+
    if (currentDiscType == discType::CAV) {
-       if (tray == trayPosition::closed) {
-            frameViewer->setFrame(x);
+        frameViewer->setFrame(x);
 
-            if (std::abs(frameNumber - x) > 50) {
-                // Send delayed F-code to emulate head movement delay
-                sendDelayedFcodeResponse("A1", 15, true); // Play after send
-            } else {
-                // Respond immediately
-                responseToFcode = "A1";
-                responseToFcodeWaiting = true;
-                frameViewer->play();
-            }
+        if (std::abs(frameNumber - x) > 50) {
+            // Send delayed F-code to emulate head movement delay
+            sendDelayedFcodeResponse("A1", 15, true); // Play after send
+        } else {
+            // Respond immediately
+            responseToFcode = "A1";
+            responseToFcodeWaiting = true;
+            frameViewer->play();
+        }
 
-            // Clear STOP register
-            stopRegister = 0;
-       } else {
-           // Respond that tray is already open
-           responseToFcode = "O";
-           responseToFcodeWaiting = true;
-       }
+        // Clear STOP register
+        stopRegister = 0;
    } else {
        // Wrong disc type
        responseToFcode = "AN";
@@ -1780,27 +1782,28 @@ void PlayerEmulator::fcodeGotoPictureNumberAndContinue(int x)
 {
    qDebug() << "fcodeGotoPictureNumberAndContinue(): Called with x =" << x;
 
-   if (currentDiscType == discType::CAV) {
-       if (tray == trayPosition::closed) {
-            if (frameViewer->isPlaying()) {
-                frameViewer->setFrame(x);
-                frameViewer->play();
-                responseToFcode = "A0";
-                responseToFcodeWaiting = true;
-            } else {
-                frameViewer->setFrame(x);
-                frameViewer->pause();
-                responseToFcode = "A0";
-                responseToFcodeWaiting = true;
-            }
+   if (tray == trayPosition::open) {
+        // Respond that tray is already open
+        responseToFcode = "O";
+        responseToFcodeWaiting = true;
+        return;
+    }
 
-            // Clear STOP register
-            stopRegister = 0;
-       } else {
-           // Respond that tray is already open
-           responseToFcode = "O";
-           responseToFcodeWaiting = true;
-       }
+   if (currentDiscType == discType::CAV) {
+        if (frameViewer->isPlaying()) {
+            frameViewer->setFrame(x);
+            frameViewer->play();
+            responseToFcode = "A0";
+            responseToFcodeWaiting = true;
+        } else {
+            frameViewer->setFrame(x);
+            frameViewer->pause();
+            responseToFcode = "A0";
+            responseToFcodeWaiting = true;
+        }
+
+        // Clear STOP register
+        stopRegister = 0;
    } else {
        // Wrong disc type
        responseToFcode = "AN";
@@ -2339,6 +2342,12 @@ void PlayerEmulator::fcodeClear(void)
 void PlayerEmulator::fcodeVideoOverlay(QByteRef parameter)
 {
    qDebug() << "fcodeVideoOverlay(): Called with parameter = " << parameter;
+
+   if (tray == trayPosition::open) {
+       responseToFcode = "O";
+       responseToFcodeWaiting = true;
+       return;
+   }
 
    switch(parameter)
    {
