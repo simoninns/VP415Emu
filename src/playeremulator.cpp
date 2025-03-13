@@ -2350,12 +2350,6 @@ void PlayerEmulator::fcodeVideoOverlay(QByteRef parameter)
 {
    qDebug() << "fcodeVideoOverlay(): Called with parameter = " << parameter;
 
-   if (tray == trayPosition::open) {
-       responseToFcode = "O";
-       responseToFcodeWaiting = true;
-       return;
-   }
-
    switch(parameter)
    {
        case '1':
@@ -2379,11 +2373,15 @@ void PlayerEmulator::fcodeVideoOverlay(QByteRef parameter)
        break;
 
        case 'X':
-       if (videoOverlayMode == videoOverlayType::lvOnly) responseToFcode = "VP1";
-       if (videoOverlayMode == videoOverlayType::external) responseToFcode = "VP2";
-       if (videoOverlayMode == videoOverlayType::hardKeyed) responseToFcode = "VP3";
-       if (videoOverlayMode == videoOverlayType::mixed) responseToFcode = "VP4";
-       if (videoOverlayMode == videoOverlayType::enhanced) responseToFcode = "VP5";
+       if (tray == trayPosition::open) {
+           responseToFcode = "O";
+       } else {
+        if (videoOverlayMode == videoOverlayType::lvOnly) responseToFcode = "VP1";
+        if (videoOverlayMode == videoOverlayType::external) responseToFcode = "VP2";
+        if (videoOverlayMode == videoOverlayType::hardKeyed) responseToFcode = "VP3";
+        if (videoOverlayMode == videoOverlayType::mixed) responseToFcode = "VP4";
+        if (videoOverlayMode == videoOverlayType::enhanced) responseToFcode = "VP5";
+       }
        responseToFcodeWaiting = true;
        break;
 
